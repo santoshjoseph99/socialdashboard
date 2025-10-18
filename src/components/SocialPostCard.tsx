@@ -62,7 +62,7 @@ export function SocialPostCard({
   }, [engagementRate]);
 
   return (
-    <div className="relative max-w-2xl">
+    <div className="relative w-full">
       {/* Gradient border wrapper - only visible in dark mode */}
       <div
         className="rounded-xl dark:p-[1.33px]"
@@ -87,7 +87,9 @@ export function SocialPostCard({
             <div className="flex items-center gap-2">
               <Avatar className="size-8">
                 <AvatarImage src={avatarUrl} alt={username} />
-                <AvatarFallback className="text-xs">{username.slice(0, 2).toUpperCase()}</AvatarFallback>
+                <AvatarFallback className="text-xs">
+                  {username.slice(0, 2).toUpperCase()}
+                </AvatarFallback>
               </Avatar>
               <div className="leading-tight">
                 <div className="font-semibold text-xs">{username}</div>
@@ -95,7 +97,7 @@ export function SocialPostCard({
               </div>
             </div>
             <CardAction>
-              <div className="flex gap-1">
+              <div className="flex">
                 <Button variant="ghost" size="icon-sm">
                   <LightbulbIcon className="size-4" />
                 </Button>
@@ -139,14 +141,24 @@ export function SocialPostCard({
 
             <div className="flex gap-2 flex-wrap">
               {tags.map((tag, index) => {
-                // Use Tailwind color classes - less vibrant for light mode
+                // Use Tailwind color classes for first two, custom for third
                 let colorClasses = '';
+                let customStyle = {};
+
                 if (index === 0) {
                   // Blue badge
-                  colorClasses = 'border-blue-400 text-blue-400 dark:border-blue-200 dark:text-blue-200';
+                  colorClasses =
+                    'border-blue-400 text-blue-400 dark:border-blue-200 dark:text-blue-200';
                 } else if (index === 1) {
                   // Pink badge
-                  colorClasses = 'border-pink-400 text-pink-400 dark:border-pink-200 dark:text-pink-200';
+                  colorClasses =
+                    'border-pink-400 text-pink-400 dark:border-pink-200 dark:text-pink-200';
+                } else if (index === 2) {
+                  // Cyan badge - custom color
+                  customStyle = {
+                    borderColor: '#4EC0E0',
+                    color: '#4EC0E0',
+                  };
                 }
 
                 return (
@@ -154,6 +166,7 @@ export function SocialPostCard({
                     key={tag}
                     variant="outline"
                     className={`rounded-full py-1.5 ${colorClasses}`}
+                    style={index === 2 ? customStyle : undefined}
                   >
                     {tag}
                   </Badge>
