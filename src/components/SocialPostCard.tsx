@@ -3,6 +3,7 @@ import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
 import {Badge} from '@/components/ui/badge';
 import {Button} from '@/components/ui/button';
 import {Card, CardContent, CardFooter, CardHeader, CardAction} from '@/components/ui/card';
+import {useEffect, useState} from 'react';
 
 interface SocialPostCardProps {
   username: string;
@@ -29,6 +30,36 @@ export function SocialPostCard({
   timestamp,
   tags,
 }: SocialPostCardProps) {
+  const [animatedRate, setAnimatedRate] = useState(0);
+
+  useEffect(() => {
+    // Parse the engagement rate (e.g., "24%" -> 24)
+    const targetValue = parseFloat(engagementRate);
+
+    if (isNaN(targetValue)) return;
+
+    const duration = 1000; // 1 second
+    const startTime = Date.now();
+
+    const animate = () => {
+      const currentTime = Date.now();
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      // Easing function for smoother animation (ease-out)
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+      const currentValue = easedProgress * targetValue;
+      setAnimatedRate(currentValue);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+
+    animate();
+  }, [engagementRate]);
+
   return (
     <Card className="max-w-2xl overflow-hidden">
       <CardHeader>
@@ -70,7 +101,7 @@ export function SocialPostCard({
           </div>
           <div className="flex items-center gap-1.5 ml-auto text-green-500">
             <TrendingUp className="size-4" />
-            <span className="font-medium">{engagementRate}</span>
+            <span className="font-medium">{animatedRate.toFixed(0)}%</span>
           </div>
         </div>
 
