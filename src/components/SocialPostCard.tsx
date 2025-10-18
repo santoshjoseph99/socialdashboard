@@ -61,8 +61,27 @@ export function SocialPostCard({
   }, [engagementRate]);
 
   return (
-    <Card className="max-w-2xl overflow-hidden">
-      <CardHeader>
+    <div className="relative max-w-2xl">
+      {/* Gradient border wrapper - only in dark mode */}
+      <div
+        className="dark:block hidden rounded-xl dark:p-[1.33px]"
+        style={{
+          background: `
+            radial-gradient(69.43% 69.43% at 50% 50%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.1) 100%),
+            radial-gradient(circle at 50% 50%, rgba(126, 129, 227, 0.5) 0%, rgba(126, 129, 227, 0.2) 100%),
+            radial-gradient(54.8% 53% at 50% 50%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%)
+          `,
+        }}
+      >
+      {/* Card with gradient background - only in dark mode */}
+      <Card className="overflow-hidden relative dark:border-0">
+        <div
+          className="dark:block hidden absolute inset-0 pointer-events-none rounded-xl"
+          style={{
+            background: 'linear-gradient(290.01deg, rgba(179, 152, 255, 0.08) 42.6%, rgba(255, 255, 255, 0) 103.07%)',
+          }}
+        />
+        <CardHeader className="relative z-10">
         <div className="flex items-center gap-3">
           <Avatar className="size-12">
             <AvatarImage src={avatarUrl} alt={username} />
@@ -85,11 +104,11 @@ export function SocialPostCard({
         </CardAction>
       </CardHeader>
 
-      <CardContent className="px-0 py-0">
+      <CardContent className="px-0 py-0 relative z-10">
         <img src={imageUrl} alt="Post content" className="w-full aspect-square object-cover" />
       </CardContent>
 
-      <CardFooter className="flex-col items-start gap-4">
+      <CardFooter className="flex-col items-start gap-4 relative z-10">
         <div className="flex items-center gap-4 w-full">
           <div className="flex items-center gap-1.5">
             <Heart className="size-5" />
@@ -118,5 +137,7 @@ export function SocialPostCard({
         </div>
       </CardFooter>
     </Card>
+      </div>
+    </div>
   );
 }
