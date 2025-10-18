@@ -8,8 +8,8 @@ export const CardsContainer = () => {
         <SocialPostCard
           username="sophia_kim12"
           followers="15.4K"
-          avatarUrl="/src/assets/avatar1.jpg"
-          imageUrl="/src/assets/mainpic1.jpg"
+          avatarUrl="/avatar1.jpg"
+          imageUrl="/mainpic1.jpg"
           likes="20.1k"
           comments={234}
           engagementRate="24%"
@@ -20,7 +20,7 @@ export const CardsContainer = () => {
         <SocialProfileCard
           username="glowwithsana"
           fullName="Sana Ahmed"
-          avatarUrl="/src/assets/avatar2.jpg"
+          avatarUrl="/avatar2.jpg"
           followers="12.3K"
           followerGrowth="+3.5% in last 7 days"
           followerGrowthPositive={true}
@@ -29,10 +29,10 @@ export const CardsContainer = () => {
           engagementGrowthPositive={false}
           tags={['Skincare', 'Mini-influencer']}
           images={[
-            '/src/assets/image1.jpg',
-            '/src/assets/image2.jpg',
-            '/src/assets/image3.jpg',
-            '/src/assets/image4.jpg',
+            '/image1.jpg',
+            '/image2.jpg',
+            '/image3.jpg',
+            '/image4.jpg',
           ]}
         />
       </div>
